@@ -1,41 +1,8 @@
-#include "stefanProblem.h"
+#include "stefanproblem/stefanProblem.h"
 #include <algorithm>
 #include <cmath>
 #include <chrono>
 #include <iostream>
-#include <QDebug>
-
-//Вычисление определителя квадратной матрицы a[n][n]
-/*double determinant(std::vector<std::vector<double>> &a, unsigned int n) {
-    unsigned int m = n;
-    if (m == 0) return 0;
-    if (m == 1) return a[0][0];
-    if (m == 2) return (a[0][0] * a[1][1] - a[1][0] * a[0][1]);
-    bool sign = false; // смена знака определителя. по умолчанию - нет
-    double det = 1; // определитель
-    double tmp;
-    unsigned int x, y;
-
-    // цикл по всей главной диагонали
-    for (unsigned int i = 0; i < n; i++) {
-        // выносим элемент a[i][i] за определитель
-        det *= a[i][i];
-        tmp = a[i][i];
-        for (x = i; x < m; x++) {
-            a[i][x] = a[i][x] / tmp;
-        }
-        // таким образом a[i][i] теперь равен 1
-        // зануляем все элементы стоящие под (i, i)-ым,
-        // при помощи вычитания с опр. коеффициентом
-        for (y = i + 1; y < n; y++) {
-            tmp = a[y][i];
-            for (x = i; x < m; x++)
-            a[y][x] -= (a[i][x] * tmp);
-        }
-    }
-    if (sign) return det * (-1);
-    return det;
-};*/
 
 std::vector<std::vector<double>> matrixTransformation(std::vector<std::vector<double>> a) {
     for (size_t i = 0; i < a.size(); ++i) {
@@ -103,41 +70,6 @@ std::vector<double> multiplyMatrixVector(std::vector<std::vector<double>> &a, st
     return res;
 }
 
-/*double determinantGauss(std::vector<std::vector<double>> &a, unsigned int n) {
-    //std::vector<std::vector<double>> tA (matrixTransformation(a));
-    std::vector<std::vector<double>> re(n, std::vector<double>(n));
-    for (int i = 0; i < n ++i)
-        re[i][i] = 1;
-    for (int columnIdx = 0; columnIdx < n; ++columnIdx) {
-        for (int rowIdx = columnIdx; rowIdx < n; ++rowIdx) {
-            if (a[rowIdx][columnIdx]) {
-                if (rowIdx != columnIdx) {
-                    a[columnIdx].swap(a[rowIdx]);
-                    for(int j = columnIdx; j < n; ++j) {
-                        a[columnIdx][j] = a[columnIdx][j]/a[columnIdx][columnIdx];
-                        re[columnIdx][j] = re[columnIdx][j]/a[columnIdx][columnIdx];
-                    }
-                    for (int decrRow = columnIdx+1; decrRow < n; ++decrRow) {
-                        re[decrRow][columnIdx] = -a[decrRow][columnIdx];
-                        for (int decrColumn = columnIdx; decrColumn < n; ++decrColumn)
-                            a[decrRow][decrColumn] = a[decrRow][decrColumn] - a[decrRow][columnIdx]*a[columnIdx][decrColumn];
-
-                    }
-                }
-            }
-            break;
-        }
-    }
-
-    for(int revRowIdx = n-1; revRowIdx >= 0; --revRowIdx) {
-        for(int incrRow = revRowIdx-1; incrRow >= 0; --incrRow) {
-            re[incrRow][revRowIdx] = -a[incrRow][revRowIdx];
-            for (int decrColumn = n-1; decrColumn >= revRowIdx; --decrColumn)
-                a[incrRow][decrColumn] = a[incrRow][decrColumn] - a[incrRow][revRowIdx]*a[revRowIdx][decrColumn];
-        }
-    }
-
-}*/
 
 void StefanProblemSolver::clean() {
     PTB.clear();
