@@ -1,6 +1,6 @@
 pipeline {
   agent {
-    docker { image 'alpine:3.14' }
+    docker { image 'alpine:latest' }
   }
   stages {
     stage('whoami') {
