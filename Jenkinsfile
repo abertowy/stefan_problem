@@ -1,17 +1,13 @@
 pipeline {
-  agent any
+  agent {
+    dockerfile true
+  }
   stages {
-    stage('checkout') {
+    stage('whoami') {
       steps {
-        git(url: 'https://github.com/abertowy/stefan_problem.git', branch: 'bazel_build')
+        sh 'whoami'
+        sh 'pwd'
       }
     }
-
-    stage('build') {
-      steps {
-        sh 'bazel build //stefanproblem:stefanproblem_bazel'
-      }
-    }
-
   }
 }
